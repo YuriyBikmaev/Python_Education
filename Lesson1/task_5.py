@@ -11,11 +11,7 @@ def InputCoordinateXY(name_point):
     return result
 
 
-def CalculateLengthSegment(a, b):
-    return ((b[0] - a[0]) ** 2 + (b[1] - a[1]) ** 2) ** 0.5
-
-
-coordinate_A = InputCoordinateXY('A')
-coordinate_B = InputCoordinateXY('B')
-print(
-    f'Расстояние между точками А{coordinate_A} и B{coordinate_B} = {CalculateLengthSegment(coordinate_A, coordinate_B):.2f}')
+a = InputCoordinateXY('A')
+b = InputCoordinateXY('B')
+result = ((b[0] - a[0]) ** 2 + (b[1] - a[1]) ** 2) ** 0.5
+print(f'Расстояние между точками А и B = {result:.2f}')

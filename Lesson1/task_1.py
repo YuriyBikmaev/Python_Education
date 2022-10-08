@@ -4,11 +4,5 @@
 # - 7 -> да
 # - 1 -> нет
 
-def CheckWeekend(n):
-    if (5<n<8):
-        print('да')
-    else:
-        print('нет')
-
 number_day = int(input('Введите день недели: '))
-CheckWeekend(number_day)
+print('да' if (5 < number_day < 8) else 'нет')

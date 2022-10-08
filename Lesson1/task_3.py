@@ -6,17 +6,19 @@
 # - x=2; y=4-> 1
 # - x=-34; y=-30 -> 3
 
-def CheckCoordinate(x, y):
-    if x > 0 and y > 0:
-        print('1')
-    elif x < 0 and y > 0:
-        print('2')
-    elif x < 0 and y < 0:
-        print('3')
-    else:
-        print('4')
-
-
-number_X = float(input('Введите координату X = '))
-number_Y = float(input('Введите координату Y = '))
-CheckCoordinate(number_X, number_Y)
+x = float(input('Введите координату X = '))
+y = float(input('Введите координату Y = '))
+if x > 0 and y > 0:
+    print('1')
+elif x < 0 and y > 0:
+    print('2')
+elif x < 0 and y < 0:
+    print('3')
+elif x > 0 and y < 0:
+    print('4')
+elif x == 0 and y != 0:
+    print('на оси Y')
+elif x != 0 and y == 0:
+    print('на оси X')
+else:
+    print('в центре оси координат')

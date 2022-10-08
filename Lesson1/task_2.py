@@ -1,10 +1,8 @@
 # Напишите программу для проверки истинности утверждения ¬(X ⋁ Y ⋁ Z) = ¬X ⋀ ¬Y ⋀ ¬Z для всех значений предикат.
 
-def CheckTruth(x, y, z):
-    return ((not (x or y or z)) == (not x and not y and not z))
-
-
-number_x = input("Введите значение x: ")
-number_y = input("Введите значение y: ")
-number_z = input("Введите значение z: ")
-print(CheckTruth(number_x, number_y, number_z))
+for x in range(2):
+    for y in range(2):
+        for z in range(2):
+            print(
+                f'Для x = {x}, y = {y}, z = {z} '
+                + 'верно' if (not (x or y or z)) == (not x and not y and not z) else 'неверно')
