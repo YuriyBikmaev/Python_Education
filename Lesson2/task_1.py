@@ -3,14 +3,12 @@
 # 6782 -> 23
 # 0.56 -> 11
 
-def SumElementNumber(number):
-    result = 0
-    while number%10>0:
-        result += number%10
-        number/=10
+def SumElementNumberInString(str_number):
+    result = 0  
+    for i in range(len(str_number)):
+        result += int(str_number[i])
     return result
 
-number = float(input('Введите вещественное число: '))
-number_1, number_2 = str(number).split('.')
-print(SumElementNumber(int(number_1)))
 
+number = float(input('Введите вещественное число: '))
+print(SumElementNumberInString(''.join(str(number).split('.'))))
