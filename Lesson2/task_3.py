@@ -2,10 +2,9 @@
 # Пример
 # для n=4, {1: 2, 2: 2.25, 3: 2,37, 4: 2.44}
 # сумма 9.06
-#
 
 number = int(input('Введите число N: '))
 lst = []
 for i in range(1, number+1):
     lst.append((1+1/i)**i)
-print(f'{sum(lst):.3}')
+print(f'{sum(lst):.2f}')
