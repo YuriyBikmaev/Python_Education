@@ -17,10 +17,10 @@ def convert_decimal_to_bin(n, result=''):
 def checking_input_decimal():
     while True:
         input_data = input('Введите десятичное число: ')
-        if not input_data.isdecimal():
-            print(f'{input_data} не является десятичным числом')
-        else:
+        if input_data.isdecimal():
             return int(input_data)
+        else:
+            print(f'{input_data} не является десятичным числом')
 
 
 number = checking_input_decimal()
