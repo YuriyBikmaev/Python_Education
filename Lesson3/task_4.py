@@ -14,6 +14,13 @@ def convert_decimal_to_bin(n, result=''):
     return result
 
 
+def rec_bin(n):
+    if n <= 0:
+        return 0
+    else:
+        return n%2 + 10*rec_bin(n//2)
+
+
 def checking_input_decimal():
     while True:
         input_data = input('Введите десятичное число: ')
@@ -24,4 +31,4 @@ def checking_input_decimal():
 
 
 number = checking_input_decimal()
-print(f'{number} -> ' + convert_decimal_to_bin(number))
+print(f'{number} -> {rec_bin(number)}')

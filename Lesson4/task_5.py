@@ -1,40 +1,48 @@
 # Даны два файла, в каждом из которых находится запись многочлена. Задача - сформировать файл, содержащий сумму многочленов.
 
-# data = open('polynomial_1.txt', 'r', encoding='utf-8')
-# polynomial_1 = data.readline()
-# data.close
-# data = open('polynomial_2.txt', 'r', encoding='utf-8')
-# polynomial_2 = data.readline()
-# data.close
-
-from gettext import find
+from polynomial import *
 
 
-def read_two_polynomial(n):
-    polynomial = []
-    for i in range(n):
-        data = open(f'polynomial_{i+1}.txt', 'r', encoding='utf-8')
-        polynomial.append(data.readline()[:-4].split(' + '))
-        data.close
-    return polynomial
+def parser_polynomial(str_pol):
+    lst = str_pol[:-4].split(' + ')
+    lst = [lst[i].replace('^', '').replace('*', '') for i in range(len(lst))]
+    lst = lst[::-1]
+    for i in range(len(lst)):
+        if is_number(lst[i]):
+            lst[i] = [lst[i], '0']
+        elif lst[i] == 'x':
+            lst[i] = ['1', '1']
+        elif lst[i][-1] == 'x':
+            lst[i] = [lst[i].split('x')[0], '1']
+        elif lst[i][0] == 'x':
+            lst[i] = ['1', lst[i].split('x')[1]]
+        else:
+            lst[i] = lst[i].split('x')
+    for i in range(int(lst[-1][1])):
+        if str(i) < lst[i][1]:
+            lst.insert(i, ['0', f'{i}'])
+    return [lst[i][0] for i in range(len(lst))]
 
-def parser_polynomial(lst):
-    result = ()
-    
-    # for i in range(len(lst)):
-    #     lst_el = str(lst[i]).split('*')
-    #     if not isinstance(lst_el[0], int):
-    #         if lst_el[0] == 'x':
-    #             lst[i] == 1
-    #         else:
-    #             lst[i] == int(lst_el[0])
-    # if int(lst[0][-1])+1>len(lst):
-    #     result = [0]*(int(lst[0][-1])+1-len(lst))
-    return type(result)
 
-list_polynomial = read_two_polynomial(2)
-print(list_polynomial)
-print(parser_polynomial(list_polynomial[0]))
+def is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
+
+
+k1 = read_file_polynomial('polynomial_1.txt')
+k2 = read_file_polynomial('polynomial_2.txt')
+print(k1)
+print(k2)
+sum_pol = create_polynomial(sum_polynomial(
+    parser_polynomial(k1), parser_polynomial(k2)))
+print(sum_pol)
+write_polynomial_in_file('sum_polynomial.txt', sum_pol)
+
+
+# print(is_number(parser_polynomial(list_polynomial[1])[0]))
 # k_1 = polynomial_1[0][-1]
 # k_2 = polynomial_1[0][-1]
 # if k_1>len()

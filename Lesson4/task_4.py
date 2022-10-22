@@ -3,31 +3,12 @@
 # - k=2 => 2*x² + 4*x + 5 = 0 или x² + 5 = 0 или 10*x² = 0
 
 from random import randint
-
-
-def create_polynomial(power):
-    ratio_list = [randint(0,100) for _ in range(power)]+[randint(1,100)]
-    result = ''
-    print(ratio_list)
-    for i,j in enumerate(ratio_list):
-        if i==0:
-            k = ''
-        elif i==1:
-            k = 'x'
-        else:
-            k = f'x^{i}'
-        if j>1:
-            result = f'{j}*' + k + ' ' + result
-        elif j==1:
-            result += k + ' ' + result 
-    if result[-2]=='*':
-        result = result[:-2] + ''
-    return ' + '.join(result.split())+' = 0'
+from polynomial import create_polynomial
+from polynomial import write_polynomial_in_file
 
 
 k = 2
-polynomial = create_polynomial(k)
-print(polynomial)
-data = open('polynomial_1.txt', 'w', encoding='utf-8')
-data.write(polynomial)
-data.close
+ratio_lst = ratio_list = [randint(0, 100) for _ in range(k)]+[randint(1, 100)]
+polynom = create_polynomial(ratio_lst)
+print(polynom)
+write_polynomial_in_file('polynomial_1.txt', polynom)
