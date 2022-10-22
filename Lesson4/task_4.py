@@ -3,48 +3,31 @@
 # - k=2 => 2*x² + 4*x + 5 = 0 или x² + 5 = 0 или 10*x² = 0
 
 from random import randint
-from unittest import result
 
 
-# def generate_expr(k):
-#     result = ''
-#     while k > 0:
-#         rand = randint(0, 100)
-#         if k == 1:
-#             k_op = 'x'
-#         else:
-#             k_op = f'x^{k}'
-#         if rand > 1:
-#             result += f'{rand}*{k_op} + '
-#         elif rand == 1:
-#             result += f'{k_op} + '
-#         k -= 1
-#     return result + f'{randint(0, 100)} = 0'
-
-
-def create_polynomial(k):
+def create_polynomial(power):
+    ratio_list = [randint(0,100) for _ in range(power)]+[randint(1,100)]
     result = ''
-    ratio_list = [randint(0,100) for _ in range(k)]+[randint(1,100)]
     print(ratio_list)
-    for i in range(k+1):
-        
-    return result
+    for i,j in enumerate(ratio_list):
+        if i==0:
+            k = ''
+        elif i==1:
+            k = 'x'
+        else:
+            k = f'x^{i}'
+        if j>1:
+            result = f'{j}*' + k + ' ' + result
+        elif j==1:
+            result += k + ' ' + result 
+    if result[-2]=='*':
+        result = result[:-2] + ''
+    return ' + '.join(result.split())+' = 0'
 
 
-# power = int(input("Введите степень: "))
-# # with open('task4.txt', 'w', encoding='utf-8') as data:
-# #     data.write(res)
-# print(create_polynomial(power))
-
-from random import randint
-max_val=100
-k = int(input('Введите натуральную степень k:'))
-# коэфф. при старшей степени не должен быть равен 0
-koeff=[randint(0,max_val) for i in range(k)]+[randint(1,max_val)]
-poly='+'.join([f'{(j,"")[j==1]}x^{i}' for i, j in enumerate(koeff) if j][::-1])
-# Поиск и замены:
-poly=poly.replace('x^1+', 'x+')
-poly=poly.replace('x^0', '')
-poly+=('','1')[poly[-1]=='+']
-poly=(poly, poly[:-2])[poly[-2:]=='^1']
-print(poly)
+k = 2
+polynomial = create_polynomial(k)
+print(polynomial)
+data = open('polynomial_1.txt', 'w', encoding='utf-8')
+data.write(polynomial)
+data.close
