@@ -8,7 +8,7 @@ from polynomial import write_polynomial_in_file
 
 
 k = 2
-ratio_lst = ratio_list = [randint(0, 100) for _ in range(k)]+[randint(1, 100)]
+ratio_list = [randint(0, 100) for _ in range(k)]+[randint(1, 100)]
 polynom = create_polynomial(ratio_lst)
 print(polynom)
 write_polynomial_in_file('polynomial_1.txt', polynom)
