@@ -51,14 +51,14 @@ def decoding_rle(file):
 
             
 
-file_patch = 'Lesson5\RLE_coding_task_4.txt'
+file_path = 'RLE_coding_task_4.txt'
 print('='*20 + '\nИсходный файл:')
-print(*read_file(file_patch))
+print(*read_file(file_path))
 print('='*20 + '\nЗакодированная информация:')
-encoding_rle(file_patch)
-print(*read_file(file_patch))
+encoding_rle(file_path)
+print(*read_file(file_path))
 
 print('='*20 + '\nРаскодированная информация:')
-decoding_rle(file_patch)
-print(*read_file(file_patch))
+decoding_rle(file_path)
+print(*read_file(file_path))
 print('='*20)
