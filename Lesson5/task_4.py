@@ -1,8 +1,6 @@
 # Реализуйте RLE алгоритм: реализуйте модуль сжатия и восстановления данных
 
-from itertools import count, groupby
-import re
-from tokenize import group
+from itertools import groupby
 
 
 def read_file(file):
@@ -23,7 +21,8 @@ def encoding_rle(file):
     lines = read_file(file)
     res = []
     for line in lines:
-        res += [''.join([f'{len(list(k))}{char}' for char, k in groupby(line)])]
+        res += [''.join([f'{len(list(k))}{char}' for char,
+                        k in groupby(line)])]
     write_file(file, res)
 
 
@@ -39,17 +38,16 @@ def decoding_rle(file):
             while '0' <= a <= '9':
                 s_int += a
                 i += 1
-                if i<len(line):
+                if i < len(line):
                     a = line[i]
                 else:
                     break
             if s_int != '':
                 midle_res.append((int(s_int), line[i]))
             i += 1
-        result.append(''.join([f'{c*k}' for c, k in midle_res])) 
+        result.append(''.join([f'{c*k}' for c, k in midle_res]))
     write_file(file, result)
 
-            
 
 file_path = 'RLE_coding_task_4.txt'
 print('='*20 + '\nИсходный файл:')
