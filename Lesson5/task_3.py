@@ -14,11 +14,12 @@ def choise_pos(player, field, c):
         else:
             print('Указаное поле занято!')
 
+
 def check_win(field):
     # res = list(zip(field[0:3], field[3:6], field[6:9]))
     # print res
     ...
-    
+
 
 def print_field(field):
     count = 0
@@ -27,15 +28,17 @@ def print_field(field):
             print('-'*13)
         else:
             print('| ' + str(field[count][0]) + ' | ' +
-                str(field[count+1][0]) + ' | ' + str(field[count+2][0]) + ' |')
+                  str(field[count+1][0]) + ' | ' + str(field[count+2][0]) + ' |')
             count += 3
 
+
 def step_game(start_player, dict_player, st, field):
-    if st%2 != 0:
+    if st % 2 != 0:
         choise_pos(dict_player[start_player], field, 'X')
     else:
-        choise_pos(dict_player[1 if start_player==0 else 0], field, '0')
+        choise_pos(dict_player[1 if start_player == 0 else 0], field, '0')
     print_field(field)
+
 
 step = 0
 #starting_player = randint(0, 1)
@@ -45,18 +48,18 @@ players_name = ['Анатолий', 'Вера']
 players = {0: players_name[0], 1: players_name[1]}
 print(f'Игру начинает {players[starting_player]}')
 
-# генеруем игровое поле
-
-str_1 = '| 1 | 2 | 3 |'
-str_2 = '| 4 | 5 | 6 |'
-str_3 = '| 7 | 8 | 9 |'
-
-playing_field = [[str(i), True] for i in range(1,10)]
+playing_field = [[str(i), True] for i in range(1, 10)]
 print(playing_field)
 
 print_field(playing_field)
-print(playing_field[0:3][0:3] + playing_field[3:6][0:3] + playing_field[6:9][0:3])
+progress = [playing_field[i-2][0]+playing_field[i-1][0]+playing_field[i][0] for i in range(2,
+                        len(playing_field), 3)]
+progress += [''.join([playing_field[i][0] for i in range(0, len(playing_field), 4)])]+[''.join([playing_field[i][0] for i in range(2, len(playing_field)-2, 2)])]
+progress += [playing_field[i][0]+playing_field[i+3][0]+playing_field[i+6][0] for i in range(0,len(playing_field)-6)]
+print(progress)
+print((progress[0]))
 
-# while step<9:
-#     step += 1
-#     step_game(starting_player, players, step, playing_field)
+while step<9:
+    step += 1
+    print(progress)
+    step_game(starting_player, players, step, playing_field)
