@@ -51,11 +51,8 @@ print(f'Игру начинает {players[starting_player]}')
 playing_field = [[str(i), True] for i in range(1, 10)]
 print(playing_field)
 
-print_field(playing_field)
-progress = [playing_field[i-2][0]+playing_field[i-1][0]+playing_field[i][0] for i in range(2,
-                        len(playing_field), 3)]
-progress += [''.join([playing_field[i][0] for i in range(0, len(playing_field), 4)])]+[''.join([playing_field[i][0] for i in range(2, len(playing_field)-2, 2)])]
-progress += [playing_field[i][0]+playing_field[i+3][0]+playing_field[i+6][0] for i in range(0,len(playing_field)-6)]
+# https://habr.com/ru/post/329300/ про алгоритм проверки результата игры
+
 print(progress)
 print((progress[0]))
 
