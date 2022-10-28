@@ -1,62 +1,71 @@
 # Создайте программу для игры в ""Крестики-нолики"".
 
-# tic_tac_toe
+from random import choice
 
-from random import randint
+
+def check_win(field, symbol):
+    size = int(len(field)**0.5)
+    matrix = [field[i:i+size] for i in range(0, len(field), size)]
+    res = [''.join(matrix[i]) for i in range(0, size)]
+    res += [''.join(field[i::size]) for i in range(size)]
+    res += [''.join([matrix[i][i] for i in range(size)])]
+    res += [''.join([matrix[i][size-1-i] for i in range(size)])]
+    if symbol*size in res:
+        return True
+    return False
+
+
+def print_field(field):
+    s = int(len(field)**0.5)
+    for i in range(s):
+        print_str = ''
+        for j in range(s):
+            print_str += ':'.ljust(3) + str(field[i*s+j]).ljust(3)
+        print_str += ':'.ljust(3)
+        if i == 0:
+            print('-'*(len(print_str)-2))
+        print(print_str)
+        print('-'*(len(print_str)-2))
 
 
 def choise_pos(player, field, c):
     while True:
-        pos = int(input(f'{player}, введите номер поля: '))
-        if field[pos-1][1]:
-            field[pos-1] = [c, False]
-            break
-        else:
-            print('Указаное поле занято!')
-
-
-def check_win(field):
-    # res = list(zip(field[0:3], field[3:6], field[6:9]))
-    # print res
-    ...
-
-
-def print_field(field):
-    count = 0
-    for i in range(7):
-        if i % 2 == 0:
-            print('-'*13)
-        else:
-            print('| ' + str(field[count][0]) + ' | ' +
-                  str(field[count+1][0]) + ' | ' + str(field[count+2][0]) + ' |')
-            count += 3
+        try:
+            pos = int(input(f'{player}, введите номер поля: '))
+            if field[pos-1] != 'X' or field[pos-1] != 'O':
+                field[pos-1] = c
+                break
+            else:
+                print('Указаное поле занято!')
+        except:
+            print('Введите корретный номер поля')
 
 
 def step_game(start_player, dict_player, st, field):
-    if st % 2 != 0:
+    win_player = ''
+    if st % 2 == 0:
         choise_pos(dict_player[start_player], field, 'X')
+        if check_win(field, 'X'):
+            win_player = dict_player[start_player]
     else:
-        choise_pos(dict_player[1 if start_player == 0 else 0], field, '0')
+        choise_pos(dict_player[1 if start_player == 0 else 0], field, 'O')
+        if check_win(field, 'O'):
+            win_player = dict_player[1 if start_player == 0 else 0]
     print_field(field)
+    if win_player == '':
+        while st < len(field)-1:
+            st += 1
+            return step_game(start_player, dict_player, st, field)
+        if st == len(field):
+            print('Ничья!')
+    else:
+        print('Победитель - '+win_player+'!')
 
-
-step = 0
-#starting_player = randint(0, 1)
-# players = [(input(f'Введите имя {i+1} игрока:\n'), '') for i in range(2)]
-starting_player = 0
-players_name = ['Анатолий', 'Вера']
-players = {0: players_name[0], 1: players_name[1]}
+print("Добро пожалось в игру КРЕСТИКИ-НОЛИКИ")
+starting_player = choice([0, 1])
+players = [input(f'Введите имя {i+1} игрока:\n') for i in range(2)]
 print(f'Игру начинает {players[starting_player]}')
-
-playing_field = [[str(i), True] for i in range(1, 10)]
-print(playing_field)
-
-# https://habr.com/ru/post/329300/ про алгоритм проверки результата игры
-
-print(progress)
-print((progress[0]))
-
-while step<9:
-    step += 1
-    print(progress)
-    step_game(starting_player, players, step, playing_field)
+size_field = 3
+playing_field = [str(i) for i in range(1, size_field**2+1)]
+print_field(playing_field)
+step_game(starting_player, players, 0, playing_field)
