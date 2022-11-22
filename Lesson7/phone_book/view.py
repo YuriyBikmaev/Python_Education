@@ -33,7 +33,8 @@ def print_db(data):
     for row in data:
         print("{: >4} {: >15} {: >15} {: >15} {: >15} {: >15}".format(*row))
 
-def input_contact():
+
+def input_contact(contact_header):
     ...
 
 def input_command():
