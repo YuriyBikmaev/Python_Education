@@ -1,21 +1,17 @@
-import model, view
+import model
+import ui_output
+import ui_input
 
 
 def run():
     model.check_file_db()
     while True:
-        if view.waiting_command()=="1":
-            view.print_menu()
-            command_user = view.input_command()
-            if model.check_command(command_user, view.MENU):
+        if ui_input.waiting_main_command() == "1":
+            ui_output.print_menu(ui_output.MENU)
+            command_user = ui_input.input_command()
+            if model.check_command(command_user, ui_output.MENU):
                 model.command_exec(command_user)
             else:
                 print("Введите корректную команду")
         else:
             exit()
-        
-        # 
-        # view.print_db(data)
-        # model.check_file_db(DB_PHONE, list(DB_COL))
-        # view.print_row_db(DB_COL)
-
