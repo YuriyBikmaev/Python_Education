@@ -12,11 +12,12 @@ def menu():
         if result.isdigit():
             return int(result)
 
+
 def incorrect_input():
     print("Введите корректное значение")
 
+
 def show_departments(data):
-    print_row_departments(models.departments.values())
     for el in data:
         print_row_departments(el)
 
@@ -26,13 +27,12 @@ def print_row_departments(row):
 
 
 def show_staff(data):
-    print_row_staff(models.staff.values())
     for el in data:
         print_row_staff(el)
 
 
 def print_row_staff(row):
-    print("{: >5} {: >30} {: >12} {: >12}".format(*row))
+    print("{: >5} {: >30} {: >12} {: >20}".format(*map(str, row)))
 
 
 def input_department():
@@ -59,22 +59,18 @@ def input_id_staff():
 
 
 def show_staff_in_departments():
-        id_department = input_id_department()
-        show_staff(select_staff_in_department(id_department))
-
-    # for el in models.staff:
-    #     if el['id_accounting'] == id_department:
-    #         print_row_staff(el.values())
-
-def select_staff_in_department(id_department):
-    models.connect_staff_db()
-    cur = models.STAFF_DB.cursor()
-    cur.execute(f"""SELECT * from staff WHERE id_departments = {id_department};""")
-    result = cur.fetchall()
-    cur.close()
-    models.STAFF_DB.close()
-    return result
+    id_department = input_id_department()
+    show_staff(models.get_staff_in_department(id_department))
 
 
 def input_new_department_in_staff():
     return [input_id_staff(), input_id_department()]
+
+def input_path_file():
+    return input("Введите путь к файлу: ")
+
+def print_final_export():
+    print("Экспорт завершен")
+
+def print_error_export():
+    print("Произошла ошибка, экспорт не выполнен!")
