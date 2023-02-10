@@ -116,7 +116,7 @@ def add_department(name):
 def add_staff(list_staff):
     change_data_db(
         """
-        INSERT INTO staff(fio, salary, departments_id) 
+        INSERT INTO staff(fio, salary, departments_id)  
         VALUES(?, ?, ?)
         ;""", tuple(list_staff))
 
