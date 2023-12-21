@@ -1,0 +1,2 @@
+model_checkpoint_path: "weigth"
+all_model_checkpoint_paths: "weigth"
